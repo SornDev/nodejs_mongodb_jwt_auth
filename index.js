@@ -8,6 +8,7 @@ const errors = require('./middlewares/errors');
 const unless = require('express-unless');
 const app = express();
 
+// ກວດຊອບການເຊື່ອມຕໍ່ ກັບ MongoDB
 mongoose.Promise = global.Promise;
 mongoose.connect(dbConfig.db,{
     useNewUrlParser: true,
@@ -21,6 +22,7 @@ mongoose.connect(dbConfig.db,{
     }
 );
 
+// ກວດຊອບ path login
 auth.authenticateToken.unless = unless;
 
 app.use(
@@ -32,12 +34,12 @@ app.use(
     })
 );
 
+// ທຳການ Run Server
 app.use(express.json());
 
+// ທຳການ Routing ໂດຍໃຊ້ Path ຫຼັກເປັນ users ຕົວຢ່າງການໃຊ້: /users/login
 app.use("/users",require("./routes/users.routes"));
-
 app.use(errors.errorHandler);
-
 app.listen(process.env.port || 4000, function(){
     console.log("Ready to Go!");
 });

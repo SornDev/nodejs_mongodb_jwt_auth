@@ -31,7 +31,9 @@ userSchema.set("toJSON",{
     },
 });
 
+// ກວດຊອບການສ້າງອີເມວຊ້ຳ
 userSchema.plugin(uniqueValidator, {message: "Email already in use."});
 
+// ທຳການສ້າງຕາຕະລາງ ຂອງ User 
 const User = mongoose.model("user", userSchema);
 module.exports = User;
